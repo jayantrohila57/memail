@@ -11,12 +11,10 @@ const SignInButton = () => {
   const HandleSignin = async () => {
     try {
       setLoading(true);
-      const data = await signIn("github", {
+      await signIn("github", {
         callbackUrl: "/dashboard",
         redirect: true,
       });
-      data?.ok && toast.success("Login successful");
-      data?.error && toast.error("Login successful");
     } catch (error: any) {
       console.log(error);
       toast.error(error?.message);
@@ -24,14 +22,15 @@ const SignInButton = () => {
     } finally {
       setTimeout(() => {
         setLoading(false);
-      }, 2000);
+      }, 10000);
     }
   };
   return (
     <>
       <Button
         disabled={loading}
-        variant="default"
+        variant="outline"
+        size={"sm"}
         onClick={() => HandleSignin()}
         type="button"
         className="transition-all duration-300"
@@ -41,7 +40,7 @@ const SignInButton = () => {
         ) : (
           <Github className="h-4 w-4 mr-2" />
         )}
-        {loading ? "Signing in..." : "Github"}
+        {loading ? "Signing in..." : "Github Sign In"}
       </Button>
     </>
   );
