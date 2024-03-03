@@ -72,47 +72,40 @@ const Layout = ({ children }: { children: ReactNode }) => {
                 label: "128",
                 icon: Inbox,
                 link: "/dashboard/inbox",
-                variant: "default",
+               
               },
               {
                 title: "Drafts",
                 label: "9",
                 icon: File,
-                link: "/dashboard/inbox",
-                variant: "ghost",
+                link: "/dashboard/draft",
+              
               },
               {
                 title: "Sent",
                 label: "",
                 icon: Send,
-                link: "/dashboard/inbox",
-                variant: "ghost",
+                link: "/dashboard/sent",
+              
               },
-              {
-                title: "Junk",
-                label: "23",
-                icon: ArchiveX,
-                variant: "ghost",
-                link: "/dashboard/inbox",
-              },
+
               {
                 title: "Trash",
                 label: "",
                 icon: Trash2,
-                link: "/dashboard/inbox",
-                variant: "ghost",
+                link: "/dashboard/trash",
+               
               },
               {
                 title: "Archive",
                 label: "",
                 icon: Archive,
-                link: "/dashboard/inbox",
-                variant: "ghost",
+                link: "/dashboard/archive",
+            
               },
             ]}
           />
 
-   
           <div className="h-auto absolute bottom-5 p-2  w-full flex justify-start items-center">
             <SignOutButton />
           </div>

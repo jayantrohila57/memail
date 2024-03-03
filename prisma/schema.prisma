@@ -70,14 +70,16 @@ model User {
 }
 
 model Mail {
-  id        String   @id @default(cuid())
-  subject   String
-  body      String   @db.Text
-  to        String
-  from      String
-  label     String
-  read      Boolean  @default(false)
-  
+  id      String   @id @default(cuid())
+  subject String
+  text    String   @db.Text
+  to      String
+  name    String
+  from    String
+  date    DateTime @default(now())
+  label   String[]
+  read    Boolean  @default(false)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
