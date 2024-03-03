@@ -1,7 +1,7 @@
-import { Toaster } from "@/components/ui/sonner";
+import Header from "@/components/layout/header";
+import HeaderLayout from "@/components/layout/header-layout";
 import { checkAuth } from "@/lib/auth/utils";
 
-import NextAuthProvider from "@/lib/auth/Provider";
 export default async function AppLayout({
   children,
 }: {
@@ -9,9 +9,11 @@ export default async function AppLayout({
 }) {
   await checkAuth();
   return (
-    <NextAuthProvider>
+    <main>
+      <HeaderLayout>
+        <Header />
+      </HeaderLayout>
       {children}
-      <Toaster richColors />
-    </NextAuthProvider>
+    </main>
   );
 }
