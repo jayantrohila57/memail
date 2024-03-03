@@ -1,6 +1,8 @@
-import { mails } from "@/components/mail/data";
 import { InboxMail } from "@/components/mail/inbox/inbox-mail";
-
+import { db } from "@/lib/db/index";
 export default async function MailPage() {
-  return <InboxMail mails={mails} />;
+  const mails = await db?.mail?.findMany({
+    where: { draft: false, archive: false, trash: false },
+  });
+  return <InboxMail mails={mails || []} />;
 }

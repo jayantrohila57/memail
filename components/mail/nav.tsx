@@ -37,7 +37,7 @@ export function Nav({ links, isCollapsed }: NavProps) {
                   href={link?.link!}
                   className={cn(
                     buttonVariants({
-                      variant: link.link === pathname ? "outline" : "ghost",
+                      variant: link.link === pathname ? "secondary" : "ghost",
                       size: "icon",
                     }),
                     "h-9 w-9"
@@ -47,7 +47,10 @@ export function Nav({ links, isCollapsed }: NavProps) {
                   <span className="sr-only">{link.title}</span>
                 </Link>
               </TooltipTrigger>
-              <TooltipContent side="right" className="flex items-center gap-4">
+              <TooltipContent
+                side="right"
+                className="flex items-center gap-4 pl-2"
+              >
                 {link.title}
                 {link.label && (
                   <span className="ml-auto text-muted-foreground">
@@ -62,13 +65,13 @@ export function Nav({ links, isCollapsed }: NavProps) {
               href={link?.link!}
               className={cn(
                 buttonVariants({
-                  variant: link.link === pathname ? "outline" : "ghost",
+                  variant: link.link === pathname ? "secondary" : "ghost",
                   size: "sm",
                 }),
                 "justify-start"
               )}
             >
-              <link.icon className="mr-2 h-4 w-4" />
+              <link.icon className="mr-3 h-4 w-4" />
               {link.title}
               {link.label && (
                 <span

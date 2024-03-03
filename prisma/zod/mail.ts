@@ -6,6 +6,7 @@ export const mailSchema = z.object({
   subject: z.string(),
   text: z.string(),
   to: z.string(),
+  name: z.string(),
   from: z.string(),
   date: z.date(),
   read: z.boolean(),
@@ -13,7 +14,8 @@ export const mailSchema = z.object({
   draft: z.boolean(),
   createdAt: z.date(),
   updatedAt: z.date(),
-  label: z.string().array(),
+  labels: z.string().array(),
+  archive: z.boolean(),
   userId: z.string().nullish(),
 })
 

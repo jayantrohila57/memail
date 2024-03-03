@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/resizable";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import { Archive, File, Inbox, Mail, Send, Trash2 } from "lucide-react";
+import { Archive, File, Inbox, Mail, PencilIcon, Send, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { ReactNode, useState } from "react";
 import SignOutButton from "../auth/sign-out";
@@ -27,7 +27,7 @@ const MailLayout = ({ children }: { children: ReactNode }) => {
       >
         <ResizablePanel
           defaultSize={defaultLayout[0]}
-          collapsedSize={4}
+          collapsedSize={3.5}
           collapsible={true}
           minSize={12}
           maxSize={30}
@@ -35,7 +35,7 @@ const MailLayout = ({ children }: { children: ReactNode }) => {
           onExpand={() => setIsCollapsed(false)}
           className={cn(
             isCollapsed &&
-              "h-[100vh] w-full relative min-w-[40px] transition-all duration-300 ease-in-out"
+              "h-[100vh] w-full relative min-w-[36px] transition-all duration-300 ease-in-out"
           )}
         >
           <div
@@ -59,6 +59,12 @@ const MailLayout = ({ children }: { children: ReactNode }) => {
           <Nav
             isCollapsed={isCollapsed}
             links={[
+              {
+                title: "Create Mail",
+                label: "",
+                icon: PencilIcon,
+                link: "/mail/create",
+              },
               {
                 title: "Inbox",
                 label: "128",
@@ -93,7 +99,7 @@ const MailLayout = ({ children }: { children: ReactNode }) => {
             ]}
           />
 
-          <div className="h-auto absolute bottom-5 p-2  w-full flex justify-start items-center">
+          <div className="h-auto max-w-14   absolute bottom-5 p-2  w-full flex justify-start items-center">
             <SignOutButton />
           </div>
         </ResizablePanel>
