@@ -9,15 +9,13 @@ import {
   Trash2,
 } from "lucide-react";
 
-import {
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
   DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Label } from "@/components/ui/label";
@@ -34,15 +32,13 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Mail } from "./data";
+import { Mail } from "../data";
 
-interface MailDisplayProps {
+interface InboxMailDisplayProps {
   mail: Mail | null;
 }
 
-export function MailDisplay({ mail }: MailDisplayProps) {
-  const today = new Date();
-
+export function InboxMailDisplay({ mail }: InboxMailDisplayProps) {
   return (
     <div className="flex h-full flex-col">
       <div className="flex items-center p-1.5">

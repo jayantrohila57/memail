@@ -2,10 +2,10 @@
 import * as React from "react";
 import { Search } from "lucide-react";
 
-import { MailDisplay } from "./mail-display";
-import { MailList } from "./mail-list";
-import { Mail } from "./data";
-import { useMail } from "./use-mail";
+import { InboxMailDisplay } from "./inbox-display";
+import { InboxMailList } from "./inbox-list";
+import { Mail } from "../data";
+import { useMail } from "../use-mail";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -15,7 +15,7 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 
-export function Mail({ mails }: { mails: Mail[] }) {
+export function InboxMail({ mails }: { mails: Mail[] }) {
   const [mail] = useMail();
   const defaultLayout = [265, 440, 655];
   return (
@@ -52,16 +52,16 @@ export function Mail({ mails }: { mails: Mail[] }) {
             </form>
           </div>
           <TabsContent value="all" className="m-0">
-            <MailList items={mails} />
+            <InboxMailList items={mails} />
           </TabsContent>
           <TabsContent value="unread" className="m-0">
-            <MailList items={mails.filter((item) => !item.read)} />
+            <InboxMailList items={mails.filter((item) => !item.read)} />
           </TabsContent>
         </Tabs>
       </ResizablePanel>
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={defaultLayout[2]} minSize={30}>
-        <MailDisplay
+        <InboxMailDisplay
           mail={mails.find((item) => item.id === mail.selected) || null}
         />
       </ResizablePanel>

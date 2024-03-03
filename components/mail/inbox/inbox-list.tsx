@@ -1,18 +1,16 @@
 import { ComponentProps } from "react";
-import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
-import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
-import { Mail } from "./data";
-import { useMail } from "./use-mail";
+import { cn } from "@/lib/utils";
+import { Mail } from "../data";
+import { useMail } from "../use-mail";
 
-interface MailListProps {
+interface InboxMailListProps {
   items: Mail[];
 }
 
-export function MailList({ items }: MailListProps) {
+export function InboxMailList({ items }: InboxMailListProps) {
   const [mail, setMail] = useMail();
 
   return (

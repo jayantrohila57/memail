@@ -1,10 +1,10 @@
 "use client";
 
+import { Github, Loader } from "lucide-react";
 import { signIn } from "next-auth/react";
-import { Button } from "../ui/button";
 import React from "react";
 import { toast } from "sonner";
-import { Github, Loader } from "lucide-react";
+import { Button } from "../ui/button";
 
 const SignInButton = () => {
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -12,7 +12,7 @@ const SignInButton = () => {
     try {
       setLoading(true);
       await signIn("github", {
-        callbackUrl: "/dashboard",
+        callbackUrl: "/mail",
         redirect: true,
       });
     } catch (error: any) {

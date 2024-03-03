@@ -1,5 +1,3 @@
-import { Input } from "@/components/ui/input";
-import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,9 +10,11 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
 import { cn } from "@/lib/utils";
-import { ArrowRightIcon, LeafIcon, LeafyGreenIcon, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 import SignInButton from "../auth/sign-in";
 const Header = () => (
   <div className="border-b   z-[500]">
@@ -55,25 +55,25 @@ function MainNav({ className, ...props }: React.HTMLAttributes<HTMLElement>) {
       {...props}
     >
       <Link
-        href="/examples/dashboard"
+        href="/examples/mail"
         className="text-sm font-medium transition-colors hover:text-primary"
       >
         Overview
       </Link>
       <Link
-        href="/examples/dashboard"
+        href="/examples/mail"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Customers
       </Link>
       <Link
-        href="/examples/dashboard"
+        href="/examples/mail"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Products
       </Link>
       <Link
-        href="/examples/dashboard"
+        href="/examples/mail"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Settings

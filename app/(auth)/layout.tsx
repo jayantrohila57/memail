@@ -10,7 +10,7 @@ export default async function AuthLayout({
   children: React.ReactNode;
 }) {
   const session = await getUserAuth();
-  if (session?.session) redirect("/dashboard");
+  if (session?.session) redirect("/mail");
 
   return (
     <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">

@@ -1,28 +1,20 @@
 "use client";
 
-import { ReactNode, useState } from "react";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-import { cn } from "@/lib/utils";
-import {
-  Archive,
-  ArchiveX,
-  File,
-  Inbox,
-  Mail,
-  Send,
-  Trash2,
-} from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
+import { Archive, File, Inbox, Mail, Send, Trash2 } from "lucide-react";
+import Link from "next/link";
+import { ReactNode, useState } from "react";
+import SignOutButton from "../auth/sign-out";
 import { Nav } from "../mail/nav";
 import { TooltipProvider } from "../ui/tooltip";
-import SignOutButton from "../auth/sign-out";
-import Link from "next/link";
 
-const Layout = ({ children }: { children: ReactNode }) => {
+const MailLayout = ({ children }: { children: ReactNode }) => {
   const defaultLayout = [20, 80];
   const [isCollapsed, setIsCollapsed] = useState(false);
   console.log(isCollapsed);
@@ -71,37 +63,32 @@ const Layout = ({ children }: { children: ReactNode }) => {
                 title: "Inbox",
                 label: "128",
                 icon: Inbox,
-                link: "/dashboard/inbox",
-               
+                link: "/mail/inbox",
               },
               {
                 title: "Drafts",
                 label: "9",
                 icon: File,
-                link: "/dashboard/draft",
-              
+                link: "/mail/draft",
               },
               {
                 title: "Sent",
                 label: "",
                 icon: Send,
-                link: "/dashboard/sent",
-              
+                link: "/mail/sent",
               },
 
               {
                 title: "Trash",
                 label: "",
                 icon: Trash2,
-                link: "/dashboard/trash",
-               
+                link: "/mail/trash",
               },
               {
                 title: "Archive",
                 label: "",
                 icon: Archive,
-                link: "/dashboard/archive",
-            
+                link: "/mail/archive",
               },
             ]}
           />
@@ -119,4 +106,4 @@ const Layout = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default Layout;
+export default MailLayout;
