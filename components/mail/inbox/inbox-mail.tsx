@@ -1,23 +1,23 @@
 "use client";
-import * as React from "react";
 import { Search } from "lucide-react";
 
-import { MailDisplay } from "./mail-display";
-import { MailList } from "./mail-list";
-import { Mail } from "./data";
-import { useMail } from "./use-mail";
-import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Mail } from "@prisma/client";
+import { InboxMailDisplay } from "./inbox-display";
+import { InboxMailList } from "./inbox-list";
+import { useState } from "react";
 
-export function Mail({ mails }: { mails: Mail[] }) {
-  const [mail] = useMail();
+export function InboxMail({ mails }: { mails: Mail[] }) {
+  const [selected,setSelected]=useState(mails[0]?.id||"")
   const defaultLayout = [265, 440, 655];
+
   return (
     <ResizablePanelGroup
       className="h-full max-h-screen items-stretch hidden flex-col md:flex"
@@ -51,18 +51,14 @@ export function Mail({ mails }: { mails: Mail[] }) {
               </div>
             </form>
           </div>
-          <TabsContent value="all" className="m-0">
-            <MailList items={mails} />
-          </TabsContent>
-          <TabsContent value="unread" className="m-0">
-            <MailList items={mails.filter((item) => !item.read)} />
-          </TabsContent>
+
+          <InboxMailList setSelected={setSelected} mails={mails} />
         </Tabs>
       </ResizablePanel>
       <ResizableHandle withHandle />
       <ResizablePanel defaultSize={defaultLayout[2]} minSize={30}>
-        <MailDisplay
-          mail={mails.find((item) => item.id === mail.selected) || null}
+        <InboxMailDisplay
+          mail={mails.find((item) => item?.id === selected) || null}
         />
       </ResizablePanel>
     </ResizablePanelGroup>

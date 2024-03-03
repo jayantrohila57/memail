@@ -62,6 +62,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  mail          Mail[]
   role          Role          @default(USER)
   password      String?
   createdAt     DateTime      @default(now())
@@ -72,14 +73,20 @@ model User {
 model Mail {
   id        String   @id @default(cuid())
   subject   String
-  body      String   @db.Text
+  text      String   @db.Text
   to        String
+  name      String
   from      String
-  label     String
+  date      DateTime @default(now())
   read      Boolean  @default(false)
-  
+  trash     Boolean  @default(false)
+  draft     Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  labels    String[]
+  archive   Boolean  @default(false)
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    String?
 }
 
 model VerificationToken {

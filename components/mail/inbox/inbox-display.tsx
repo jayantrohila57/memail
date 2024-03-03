@@ -9,15 +9,13 @@ import {
   Trash2,
 } from "lucide-react";
 
-import {
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
   DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Label } from "@/components/ui/label";
@@ -34,17 +32,16 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Mail } from "./data";
+import { Mail } from "@prisma/client";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
-interface MailDisplayProps {
+interface InboxMailDisplayProps {
   mail: Mail | null;
 }
 
-export function MailDisplay({ mail }: MailDisplayProps) {
-  const today = new Date();
-
+export function InboxMailDisplay({ mail }: InboxMailDisplayProps) {
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex relative z-10 flex-col h-screen overflow-hidden">
       <div className="flex items-center p-1.5">
         <div className="flex items-center gap-2">
           <Tooltip>
@@ -75,65 +72,6 @@ export function MailDisplay({ mail }: MailDisplayProps) {
             <TooltipContent>Move to trash</TooltipContent>
           </Tooltip>
           <Separator orientation="vertical" className="mx-1 h-6" />
-          <Tooltip>
-            <Popover>
-              <PopoverTrigger asChild>
-                <TooltipTrigger asChild>
-                  <Button variant="ghost" size="icon" disabled={!mail}>
-                    <Clock className="h-4 w-4" />
-                    <span className="sr-only">Snooze</span>
-                  </Button>
-                </TooltipTrigger>
-              </PopoverTrigger>
-              <PopoverContent className="flex w-[535px] p-0">
-                <div className="flex flex-col gap-2 border-r px-2 py-4">
-                  <div className="px-4 text-sm font-medium">Snooze until</div>
-                  <div className="grid min-w-[250px] gap-1">
-                    <Button
-                      variant="ghost"
-                      className="justify-start font-normal"
-                    >
-                      Later today{" "}
-                      <span className="ml-auto text-muted-foreground">
-                        date not found
-                      </span>
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      className="justify-start font-normal"
-                    >
-                      Tomorrow
-                      <span className="ml-auto text-muted-foreground">
-                        date not found
-                      </span>
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      className="justify-start font-normal"
-                    >
-                      This weekend
-                      <span className="ml-auto text-muted-foreground">
-                        date not found
-                      </span>
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      className="justify-start font-normal"
-                    >
-                      Next week
-                      <span className="ml-auto text-muted-foreground">
-                        date not found
-                      </span>
-                    </Button>
-                  </div>
-                </div>
-                <div className="p-2">
-                  <Calendar />
-                </div>
-              </PopoverContent>
-            </Popover>
-            <TooltipContent>Snooze</TooltipContent>
-          </Tooltip>
         </div>
         <div className="ml-auto flex items-center gap-2">
           <Tooltip>
@@ -186,39 +124,36 @@ export function MailDisplay({ mail }: MailDisplayProps) {
           <div className="flex items-start p-4">
             <div className="flex items-start gap-4 text-sm">
               <Avatar>
-                <AvatarImage alt={mail.name} />
-                <AvatarFallback>
-                  {mail.name
-                    .split(" ")
-                    .map((chunk: any) => chunk[0])
-                    .join("")}
-                </AvatarFallback>
+                <AvatarImage alt={mail?.subject} />
+                <AvatarFallback>NA</AvatarFallback>
               </Avatar>
               <div className="grid gap-1">
-                <div className="font-semibold">{mail.name}</div>
-                <div className="line-clamp-1 text-xs">{mail.subject}</div>
+                <div className="font-semibold">{mail?.subject}</div>
+                <div className="line-clamp-1 text-xs">{mail?.subject}</div>
                 <div className="line-clamp-1 text-xs">
-                  <span className="font-medium">Reply-To:</span> {mail.email}
+                  <span className="font-medium">Reply-To:</span> {mail?.to}
                 </div>
               </div>
             </div>
-            {mail.date && (
+            {mail?.date && (
               <div className="ml-auto text-xs text-muted-foreground">
                 date not found
               </div>
             )}
           </div>
           <Separator />
-          <div className="flex-1 whitespace-pre-wrap p-4 text-sm">
-            {mail.text}
-          </div>
-          <Separator className="mt-auto" />
-          <div className="p-4">
+          <ScrollArea className="h-[60vh] overflow-y-auto w-full ">
+            <div className=" w-full h-full pb-20 whitespace-pre-wrap p-4 text-sm">
+              {mail?.text}
+            </div>
+          </ScrollArea>
+
+          <div className="absolute bg-popover border-t w-full p-4 bottom-0">
             <form>
               <div className="grid gap-4">
                 <Textarea
                   className="p-4"
-                  placeholder={`Reply ${mail.name}...`}
+                  placeholder={`Reply ${mail?.to}...`}
                 />
                 <div className="flex items-center">
                   <Label
@@ -241,8 +176,10 @@ export function MailDisplay({ mail }: MailDisplayProps) {
           </div>
         </div>
       ) : (
-        <div className="p-8 text-center text-muted-foreground">
-          No message selected
+        <div className="">
+          <div className="p-8 text-center text-muted-foreground">
+            No message selected
+          </div>
         </div>
       )}
     </div>

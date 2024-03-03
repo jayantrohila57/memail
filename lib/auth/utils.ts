@@ -27,7 +27,6 @@ export type AuthSession = {
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db) as Adapter,
-  debug: env.NODE_ENV === "development",
   pages: {
     signIn: "/sign-in",
     error: "/auth-error",

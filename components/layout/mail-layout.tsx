@@ -1,28 +1,20 @@
 "use client";
 
-import { ReactNode, useState } from "react";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-import { cn } from "@/lib/utils";
-import {
-  Archive,
-  ArchiveX,
-  File,
-  Inbox,
-  Mail,
-  Send,
-  Trash2,
-} from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
+import { Archive, File, Inbox, Mail, PencilIcon, Send, Trash2 } from "lucide-react";
+import Link from "next/link";
+import { ReactNode, useState } from "react";
+import SignOutButton from "../auth/sign-out";
 import { Nav } from "../mail/nav";
 import { TooltipProvider } from "../ui/tooltip";
-import SignOutButton from "../auth/sign-out";
-import Link from "next/link";
 
-const Layout = ({ children }: { children: ReactNode }) => {
+const MailLayout = ({ children }: { children: ReactNode }) => {
   const defaultLayout = [20, 80];
   const [isCollapsed, setIsCollapsed] = useState(false);
   console.log(isCollapsed);
@@ -35,7 +27,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
       >
         <ResizablePanel
           defaultSize={defaultLayout[0]}
-          collapsedSize={4}
+          collapsedSize={3.5}
           collapsible={true}
           minSize={12}
           maxSize={30}
@@ -43,7 +35,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
           onExpand={() => setIsCollapsed(false)}
           className={cn(
             isCollapsed &&
-              "h-[100vh] w-full relative min-w-[40px] transition-all duration-300 ease-in-out"
+              "h-[100vh] w-full relative min-w-[36px] transition-all duration-300 ease-in-out"
           )}
         >
           <div
@@ -68,52 +60,46 @@ const Layout = ({ children }: { children: ReactNode }) => {
             isCollapsed={isCollapsed}
             links={[
               {
+                title: "Create Mail",
+                label: "",
+                icon: PencilIcon,
+                link: "/mail/create",
+              },
+              {
                 title: "Inbox",
                 label: "128",
                 icon: Inbox,
-                link: "/dashboard/inbox",
-                variant: "default",
+                link: "/mail/inbox",
               },
               {
                 title: "Drafts",
                 label: "9",
                 icon: File,
-                link: "/dashboard/inbox",
-                variant: "ghost",
+                link: "/mail/draft",
               },
               {
                 title: "Sent",
                 label: "",
                 icon: Send,
-                link: "/dashboard/inbox",
-                variant: "ghost",
+                link: "/mail/sent",
               },
-              {
-                title: "Junk",
-                label: "23",
-                icon: ArchiveX,
-                variant: "ghost",
-                link: "/dashboard/inbox",
-              },
+
               {
                 title: "Trash",
                 label: "",
                 icon: Trash2,
-                link: "/dashboard/inbox",
-                variant: "ghost",
+                link: "/mail/trash",
               },
               {
                 title: "Archive",
                 label: "",
                 icon: Archive,
-                link: "/dashboard/inbox",
-                variant: "ghost",
+                link: "/mail/archive",
               },
             ]}
           />
 
-   
-          <div className="h-auto absolute bottom-5 p-2  w-full flex justify-start items-center">
+          <div className="h-auto max-w-14   absolute bottom-5 p-2  w-full flex justify-start items-center">
             <SignOutButton />
           </div>
         </ResizablePanel>
@@ -126,4 +112,4 @@ const Layout = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default Layout;
+export default MailLayout;
